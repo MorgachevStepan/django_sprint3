@@ -12,7 +12,7 @@
     <p>
       Дружба и рассказы о новых, неизведанных впечатлениях — вот
       что вы найдете на нашем ресурсе.  Миллионы блогов по различным темам.
-      Путешествия, политики, развлечения, мода, мода, литература, дизайн и все
+      Путешествия, политики, развлечения, мода, литература, дизайн и все
       другие сферы человеческой деятельности.
     </p>
     <p>
@@ -27,6 +27,10 @@
       {% for post in posts %}
         <li>
           <a href="{% url 'blog:post_detail' post.pk %}">{{ post.title }}</a> - {{ post.pub_date }}
+          <br>
+          Категория: <a href="{% url 'blog:category_posts' post.category.slug %}">{{ post.category.title }}</a>
+          <br>
+          Локация: {% if post.location and post.location.is_published %}{{ post.location.name }}{% else %}Планета Земля{% endif %}
         </li>
       {% empty %}
         <p>На данный момент нет опубликованных постов.</p>
