@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block title %}
+  Публикации в категории «{{ category.title }}»
+{% endblock %}
+{% block content %}
+<h1>Публикации в категории «{{ category.title }}»</h1>
+<p class="mb-5">{{ category.description }}</p>
+{% for post in posts %}
+  <article class="mb-5">  
+    <h2><a href="{% url 'blog:post_detail' post.pk %}">{{ post.title }}</a></h2>
+    <p>{{ post.text|truncatewords:20 }}</p>
+    <p><small>Опубликовано {{ post.pub_date|date:"d E Y" }}</small></p>
+  </article>
+{% empty %}
+  <p>В этой категории пока нет публикаций.</p>
+{% endfor %}
+{% endblock %}
